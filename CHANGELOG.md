@@ -1,4 +1,4 @@
-# Changelog
+rmdir /s /q build# Changelog
 
 All notable changes to Water Companion are documented here.
 
