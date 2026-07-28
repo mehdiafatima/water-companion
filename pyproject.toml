@@ -1,0 +1,77 @@
+[build-system]
+requires = ["hatchling>=1.26.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "water-companion"
+version = "1.0.0"
+description = "A beautiful animated desktop water reminder built with Python and PySide6."
+readme = "README.md"
+requires-python = ">=3.12"
+
+license = { file = "LICENSE" }
+
+authors = [
+    { name = "Water Companion Contributors" }
+]
+
+keywords = [
+    "water",
+    "hydration",
+    "desktop",
+    "reminder",
+    "health",
+    "PySide6",
+    "Qt"
+]
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Utilities",
+]
+
+dependencies = [
+    "PySide6>=6.7.0",
+    "typer>=0.12.0",
+    "rich>=13.7.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/YOUR_USERNAME/water-companion"
+Repository = "https://github.com/YOUR_USERNAME/water-companion"
+Issues = "https://github.com/YOUR_USERNAME/water-companion/issues"
+
+[project.scripts]
+water-companion = "water_companion.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["water_companion"]
+
+[tool.hatch.envs.default]
+dependencies = [
+    "pytest>=8.0",
+    "pytest-qt>=4.4",
+    "pyinstaller>=6.0",
+]
+
+[tool.hatch.envs.default.scripts]
+test = "pytest tests -v"
+build-exe = "pyinstaller build.spec"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP"]
+ignore = ["E501"]
