@@ -2,7 +2,10 @@
 
 # 💧 Water Companion
 
-**Your beautiful, animated desktop hydration reminder**
+
+A beautiful, animated desktop hydration reminder built with **Python** and **PySide6**.
+
+Water Companion helps you build a healthier habit by gently reminding you to drink water while you work, study, code, or game. It features a fully animated water-drop mascot drawn entirely in code using **QPainter**, with no external image assets.
 
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
 [![PySide6](https://img.shields.io/badge/GUI-PySide6-41cd52.svg)](https://pypi.org/project/PySide6/)
@@ -13,159 +16,204 @@
 
 </div>
 
----
 
 ## ✨ Features
 
-- **🎨 Animated Water-Drop Mascot** — Drawn 100% with `QPainter`. No images, no assets. Blinking eyes, floating animation, smiling when you drink, sad when you skip.
-- **🔔 Smart Reminders** — Configurable intervals from 5 minutes to 2 hours.
-- **💫 Particle Effects** — Hearts & sparkles fly when you drink. Sad rain drops fall when you skip.
-- **🖥️ System Tray** — Lives quietly in your tray. Pause, resume, or change interval without opening the window.
-- **💻 Full CLI** — Control everything from your terminal with `water-companion` commands.
-- **📁 Offline-First** — Settings stored locally in JSON. No cloud, no account, no internet.
-- **🚀 PyPI-Ready** — Install with a single `pip install` command.
-- **📦 Standalone Binary** — Build a `.exe` with PyInstaller.
+- 💧 Animated water-drop mascot drawn entirely with **QPainter**
+- 😊 Blinking eyes with happy and sad expressions
+- ✨ Floating animations, hearts, sparkles, and rain effects
+- 🔔 Custom reminder intervals from **5 minutes to 2 hours**
+- 🖥️ Runs quietly in the **System Tray**
+- 💻 Built-in **Command Line Interface (CLI)**
+- 📁 Offline-first with local JSON configuration
+- 🚀 Available on **PyPI**
+- 🎨 Clean and modern desktop interface
 
 ---
 
-## 🚀 Quick Start
+# 🚀 Installation
 
-### Install from PyPI
+## Prerequisites
+
+Install **Python 3.12 or later** from:
+
+https://www.python.org/downloads/
+
+> **Important:** During installation, make sure **"Add Python to PATH"** is checked.
+
+Verify the installation:
+
+```bash
+python --version
+```
+
+Upgrade pip (recommended):
+
+```bash
+python -m pip install --upgrade pip
+```
+
+---
+
+## Install Water Companion
 
 ```bash
 pip install water-companion
-water-companion
 ```
 
-That's it! The app launches, shows the setup window, and quietly moves to your system tray.
-
-### Install for Development
+Launch the application:
 
 ```bash
-git clone https://github.com/yourusername/water-companion
-cd water-companion
-pip install -e ".[dev]"
 water-companion
 ```
+
+That's it! 🎉
+
+On the first launch, choose your preferred reminder interval and click **Start**. The application will automatically minimize to the system tray and begin sending hydration reminders.
 
 ---
 
-## 💻 CLI Reference
+# 💻 CLI Commands
 
-```
-water-companion                    Launch the app (default)
-water-companion start              Launch the app
-water-companion stop               Stop the running instance
-water-companion pause              Pause reminders
-water-companion resume             Resume paused reminders
-water-companion status             Show current state and next reminder
-water-companion config             Interactively change the interval
-water-companion reset              Reset all settings to defaults
-water-companion version            Print version
-```
+| Command | Description |
+|---------|-------------|
+| `water-companion` | Launch the application |
+| `water-companion start` | Start Water Companion |
+| `water-companion stop` | Stop the running instance |
+| `water-companion pause` | Pause reminders |
+| `water-companion resume` | Resume reminders |
+| `water-companion status` | Display the current status |
+| `water-companion config` | Change the reminder interval |
+| `water-companion reset` | Restore default settings |
+| `water-companion version` | Display the installed version |
 
-### Examples
+---
+
+## Example
+
+Check the current reminder status:
 
 ```bash
-# Check if it's running and when the next reminder fires
 water-companion status
+```
 
-# Pause while you're in a meeting
+Pause reminders:
+
+```bash
 water-companion pause
+```
 
-# Come back after the meeting
+Resume reminders:
+
+```bash
 water-companion resume
+```
 
-# Change to every 15 minutes
+Change the reminder interval:
+
+```bash
 water-companion config
 ```
 
 ---
 
-## 🎮 How It Works
+# 🎮 How It Works
 
-1. **Launch** — Run `water-companion` from terminal or double-click.
-2. **Setup** — Choose your reminder interval (5 min to 2 hours).
-3. **Click "Start"** — App minimises to system tray. Timer begins.
-4. **Reminder fires** — Animated water drop slides in from the bottom-right corner.
-5. **Respond:**
-   - **Yes ✅** → Drop smiles → Hearts & sparkles fly → Timer restarts
-   - **No ❌** → Drop looks sad → Sad drops fall → Timer restarts
+1. Launch the application.
+2. Select a reminder interval between **5 minutes** and **2 hours**.
+3. Click **Start**.
+4. The application moves to the system tray and starts the timer.
+5. When it's time to drink water, an animated reminder appears.
+6. Respond to the reminder:
+   - ✅ **Yes** — The mascot smiles, heart and sparkle animations play, and the timer restarts.
+   - ❌ **No** — The mascot becomes sad, rain animations appear, and the timer restarts.
 
 ---
 
-## 🏗️ Architecture
+# 🏗️ Project Structure
 
 ```
 water_companion/
-├── main.py                   # App controller + IPC server
-├── cli.py                    # Typer CLI
+├── main.py
+├── cli.py
 ├── core/
-│   ├── reminder_manager.py   # QTimer state machine (IDLE/RUNNING/PAUSED)
-│   └── messages.py           # Encouragement + gentle reminder text
+│   ├── reminder_manager.py
+│   └── messages.py
 ├── mascot/
-│   ├── water_drop_widget.py  # QPainter mascot (no assets)
-│   └── animations.py        # Slide, float, particle animations
+│   ├── water_drop_widget.py
+│   └── animations.py
 ├── ui/
-│   ├── setup_window.py       # First-run setup window
-│   ├── reminder_window.py    # Animated reminder popup
-│   ├── tray_manager.py       # System tray icon + menu
-│   └── styles.py             # QSS design system
+│   ├── setup_window.py
+│   ├── reminder_window.py
+│   ├── tray_manager.py
+│   └── styles.py
 ├── settings/
-│   └── config.py             # JSON config (load/save/reset)
+│   └── config.py
 └── utils/
-    ├── constants.py          # App-wide constants
-    └── logger.py             # Rotating file + console logger
+    ├── constants.py
+    └── logger.py
 ```
-
-**Design principles:**
-- SOLID — each class has one responsibility
-- Qt Signals/Slots — zero tight coupling between UI and logic
-- No global state — everything passes through the controller
-- Clean Architecture — UI, core, and data layers are fully independent
 
 ---
 
-## 🧪 Running Tests
+# 🧠 Architecture
+
+The project follows modern software engineering principles:
+
+- SOLID Principles
+- Clean Architecture
+- Qt Signals & Slots
+- Modular Components
+- Separation of Concerns
+- Offline-first Design
+
+---
+
+# 🧪 Running Tests
+
+Install testing dependencies:
 
 ```bash
 pip install pytest pytest-qt
+```
+
+Run the test suite:
+
+```bash
 pytest tests/ -v
 ```
 
-Expected output:
-```
-tests/test_config.py            ✓  10 passed
-tests/test_reminder_manager.py  ✓  12 passed
-tests/test_messages.py          ✓   6 passed
-```
-
 ---
 
-## 📦 Building a Standalone Binary (Windows)
+# 📦 Building the Package
 
 ```bash
-pip install pyinstaller
-pyinstaller build.spec
-```
-
-The binary will be at `dist/water-companion/water-companion.exe`.
-
----
-
-## 📤 Publishing to PyPI
-
-```bash
-pip install build twine
+pip install build
 python -m build
+```
+
+The generated distributions will be available inside the **dist/** directory.
+
+---
+
+# 📤 Publishing to PyPI
+
+```bash
+pip install twine
 twine upload dist/*
 ```
 
 ---
 
-## ⚙️ Configuration
+# ⚙️ Configuration
 
-Settings are stored at `~/.water-companion/config.json`:
+Application settings are stored locally:
+
+```
+~/.water-companion/config.json
+```
+
+Example:
 
 ```json
 {
@@ -175,37 +223,60 @@ Settings are stored at `~/.water-companion/config.json`:
 }
 ```
 
-Logs are at `~/.water-companion/app.log` (rotating, max 6 MB).
+Application logs are stored in:
+
+```
+~/.water-companion/app.log
+```
 
 ---
 
-## 🛠️ Requirements
+# 🛠️ Requirements
 
-| Dependency | Version | Purpose |
-|---|---|---|
-| Python | 3.12+ | Language |
-| PySide6 | 6.7+ | GUI framework |
-| Typer | 0.12+ | CLI |
-| Rich | 13.7+ | CLI formatting |
+| Dependency | Version |
+|------------|---------|
+| Python | 3.12+ |
+| PySide6 | 6.7+ |
+| Typer | 0.12+ |
+| Rich | 13.7+ |
 
 ---
 
-## 🤝 Contributing
+# 🤝 Contributing
+
+Contributions are welcome.
 
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/my-feature`
-3. Make your changes with tests
-4. Run `pytest tests/ -v`
-5. Submit a pull request
+2. Create a new branch
+
+```bash
+git checkout -b feature/my-feature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push your branch
+
+```bash
+git push origin feature/my-feature
+```
+
+5. Open a Pull Request
 
 ---
 
-## 📄 License
+# 📄 License
 
-[MIT](LICENSE) © Water Companion Contributors
+This project is licensed under the **MIT License**.
 
 ---
 
-<div align="center">
-Made with 💧 and Python
-</div>
+## ❤️ Support
+
+If you find this project useful, consider giving it a ⭐ on GitHub and sharing it with others.
+
+Stay hydrated. 💧
